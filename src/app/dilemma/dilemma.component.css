@@ -1,0 +1,102 @@
+
+
+   #dilemmaElement{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+   }
+  
+ button.clicked > h1{
+  color:white;
+}
+
+
+  
+  h1 {
+    margin: 0; /* Elimina los márgenes por defecto */
+    color: #0F2E52; /* El color del texto */
+    font-size: 2.5rem; 
+    font-family: "Montserrat", sans-serif; 
+  }
+  
+  .daily-title{
+    margin-right: -50px;
+  }
+  .dilemma-title {
+    margin-left: 500px;
+  }
+
+*, *::before,*::after{
+    box-sizing: border-box;
+}
+
+.clicked {
+    background-color: #0F2E52;
+  }
+
+/* .progress-bar{
+    position:relative;
+    height:3em;
+    background-color: #111;
+    border-radius: 1.5em;
+    color:white;
+
+}
+.progress-bar::before{
+    content: attr(data-label);
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: .5em;
+    top: .5em;
+    bottom: .5em;
+    width: var(--width,0);
+    min-width: 1rem;
+    max-width: calc(100% - 1em);
+    background-color: #069;
+    border-radius: 1em;
+    padding:1em; 
+    transition: width 2s ease-in-out; /* Add this line */
+
+
+
+/* .progress-container {
+    width: 100%;
+    background-color: #f1f1f1;
+  }
+  
+  .progress-bar {
+    height: 30px;
+    background-color: #4caf50;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+  }
+     */
+
+
+.line-box{
+    padding:2px;
+    width:40%;
+    height: 20px;
+    border: 1px solid #267591;
+    border-radius: 20px;
+}
+
+.line{
+    height: 20px;
+    border-radius: 20px;
+    background: #57d295;
+    animation: loading 2s forwards cubic-bezier(0,0,0,0);
+
+}
+
+@keyframes loading{
+    0%{
+        width: 0%;
+    }
+    100%{
+        width: 100%;
+    }
+}

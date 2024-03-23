@@ -1,0 +1,21 @@
+<div style="text-align: center;">
+    <div class="box" id="dilemmaElement"  style="color:white; background: #4EC8DF;">
+        {{dilema}}
+    </div>
+
+    <div class="btn-container">
+        <button *ngFor="let button of buttons; let i=index" 
+        class="btn" 
+        [class.clicked]="clickedButton === button" 
+        [class.no-hover]="buttonClicked" 
+        (click)="clickRespuesta(button)">
+            {{ button.text }}
+            <br>
+            <h1 *ngIf="buttonClicked" class="percentage" style="text-align: center;">{{ button.percentage}}%</h1>
+        
+        </button>
+    
+    </div>
+    
+    <app-noticia  *ngIf="buttonClicked" [idDilema]=idDilemma></app-noticia>
+</div>

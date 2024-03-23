@@ -1,0 +1,48 @@
+
+
+   .fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #4EC8DF; 
+    z-index: 1000;
+  }
+  
+  .header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 0; /* Ajusta el relleno según sea necesario */
+  }
+  
+  .header-line {
+    flex-grow: 1; /* Hace que las líneas ocupen el espacio disponible */
+    background-color: #0F2E52; /* Color de la línea */
+    height: 0.3vw; /* Altura de la línea */
+    
+  }
+  
+  .header-logo {
+    /* Altura del logo, ajusta según el tamaño de tu imagen */
+    position: absolute;
+    height: 8vw;
+    /* Asegura que la imagen no se estire o se comprima */
+    object-fit: contain;
+    margin-top: 5vw;
+  }
+  
+  h1 {
+    margin: 0; /* Elimina los márgenes por defecto */
+    color: #0F2E52; /* El color del texto */
+    font-size: 3vw; /* Ajusta el tamaño de la fuente como necesites */
+    font-family: "Righteous";
+  }
+  
+  .daily-title{
+    margin-right: -4vw;
+  }
+  .dilemma-title {
+    margin-left: 25vw;
+  }
+

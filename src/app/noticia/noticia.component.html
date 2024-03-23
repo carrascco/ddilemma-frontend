@@ -1,0 +1,24 @@
+<br>
+<br>
+<div class="btn-container">
+    <button class="btn" (click)="noticiaRetrieved()">
+        Ver Noticia
+    </button>
+
+</div>
+<br>
+<div *ngIf="viewNoticia" class="box" id="noticiaElement">
+    <h1>{{noticia.titulo}}</h1>
+    <div style="display: flex;">
+        <div style="flex: 1;">
+            <article>{{noticia.cuerpo}}</article>
+            <p>{{noticia.fuente}}</p> 
+        </div>
+        <div style="flex: 0.5; justify-content: center; allign-items: center; padding-left: 2vw;">
+            <img src="{{noticia.url_imagen}}" alt="imagen noticia" style="width: 60%; height: auto;">
+        </div>
+    </div>
+    <p>Mira la noticia completa en:</p>
+    <a href="{{noticia.url}}" target="_blank">{{noticia.url}}</a>
+    
+</div>

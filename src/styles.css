@@ -1,1 +1,104 @@
-/* You can add global styles to this file, and also import other style files */
+
+html {
+    background-color: #2196F3;
+    min-height: 1000px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 550;
+    background: url(./assets/bg-pattern.png);
+    
+  }
+  body {
+    padding-top: 9.375vw; 
+  }
+  
+  h1 {
+    color: #fff;
+    padding: 0.7vw;
+  }
+  
+  .box {
+    max-width: 36.46vw;
+    margin: 2.6vw auto;
+    background: white;
+    border-radius: 0.26vw;
+    box-shadow: 0.26vw 0.26vw 0.781vw -0.26vw rgba(0, 0, 0, 0.3);
+  }
+  
+  #heading {
+    background-color: #0F2E52;
+    text-align: center;
+  }
+  
+  .item {
+    min-height: 3.646vw;
+    display: flex;
+    align-items: center;
+    border-bottom: 0.052vw solid #F1F1F1;
+  }
+  
+  .item:last-child {
+    border-bottom: 0;
+  }
+  
+  
+  input[type="checkbox"] {
+    margin: 1.042vw;
+  }
+  
+  p {
+    margin: 0;
+    padding: 1.042vw;
+    font-size: 1.042vw;
+    font-weight: 200;
+    color: #00204a;
+  }
+  
+  form {
+    text-align: center;
+    margin-left: 1.042vw;
+  }
+  
+ 
+
+  /* Contenedor de los botones */
+.btn-container {
+  display: flex; /* Utiliza Flexbox para posicionar los botones */
+  justify-content: center; /* Centra los botones horizontalmente si deseas */
+  flex-wrap: wrap; /* Permite que los botones pasen a la siguiente línea si no hay espacio */
+}
+
+/* Estilos de los botones */
+.btn {
+  background-color: #ffffff; /* Color de fondo blanco */
+  color: black; /* Color del texto azul */
+  border: none; /* Sin borde */
+  border-radius:  1.042vw; /* Esquinas redondeadas */
+  padding: 0.521vw  1.042vw; /* Relleno */
+  margin: 0.521vw; /* Espacio entre botones */
+  cursor: pointer; /* Cursor en forma de mano al pasar el ratón */
+  box-shadow: 0 0.2vw 0.4vw rgba(0, 0, 0, 0.1); /* Sombra ligera para el botón */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Transición suave para efectos al hacer hover */
+  width: 16.927vw;
+}
+
+.btn:hover {
+  background-color: #4EC8DF; /* Cambio de color al pasar el ratón por encima */
+  color: #ffffff; /* Cambio de color de texto al pasar el ratón por encima */
+  box-shadow: 0 0.313vw 0.625vw rgba(0, 0, 0, 0.2); /* Sombra más profunda al hacer hover */
+}
+
+.btn:active {
+  box-shadow: 0 0.104vw 0.207vw rgba(0, 0, 0, 0.2); /* Sombra más plana al hacer clic */
+  transform: translateY(0.104vw); /* Efecto de presión al hacer clic */
+}
+  
+.clicked {
+  background-color: #0F2E52;
+  color:white;
+}
+
+.no-hover{
+  pointer-events: none;
+}
+
+  
