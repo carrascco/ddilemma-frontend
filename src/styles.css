@@ -4,7 +4,8 @@ html {
     min-height: 1000px;
     font-family: "Montserrat", sans-serif;
     font-weight: 550;
-    background: url(./assets/bg-pattern.png);
+    font-size: 1vw;
+    background: url(https://i.imgur.com/XT0IddR.png);
     
   }
   body {
@@ -79,6 +80,9 @@ html {
   box-shadow: 0 0.2vw 0.4vw rgba(0, 0, 0, 0.1); /* Sombra ligera para el botón */
   transition: background-color 0.3s, box-shadow 0.3s; /* Transición suave para efectos al hacer hover */
   width: 16.927vw;
+  font-size: 0.85vw;
+  text-align: center;
+  hyphens: auto;
 }
 
 .btn:hover {
@@ -101,4 +105,24 @@ html {
   pointer-events: none;
 }
 
-  
+@media screen and (max-width: 1000px) {
+  .btn {
+    font-size: 2.75vw;
+    width: 40%;
+    margin: 2vw;
+    border-radius: 2.5vw;
+    padding: 3vw;
+    
+  }
+
+  .box{
+    max-width: 80.5vw;
+    border-radius: 2vw;
+  }
+  html{
+    font-size: 4vw;
+  }
+  body {
+    padding-top: 16vw; 
+  }
+}

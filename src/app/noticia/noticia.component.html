@@ -1,6 +1,6 @@
 <br>
 <br>
-<div class="btn-container">
+<div class="btn-container" id="verNoticia">
     <button class="btn" (click)="noticiaRetrieved()">
         Ver Noticia
     </button>
@@ -9,12 +9,13 @@
 <br>
 <div *ngIf="viewNoticia" class="box" id="noticiaElement">
     <h1>{{noticia.titulo}}</h1>
-    <div style="display: flex;">
+    <div id="contenedorNoticia" >
         <div style="flex: 1;">
             <article>{{noticia.cuerpo}}</article>
             <p>{{noticia.fuente}}</p> 
+            <br id="saltoPostFuente">
         </div>
-        <div style="flex: 0.5; justify-content: center; allign-items: center; padding-left: 2vw;">
+        <div id="imgContainer" style="flex: 0.5; justify-content: center; allign-items: center; padding-left: 2vw;">
             <img src="{{noticia.url_imagen}}" alt="imagen noticia" style="width: 60%; height: auto;">
         </div>
     </div>

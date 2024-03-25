@@ -1,7 +1,48 @@
 .box{
-    max-width: 1400px;
+    max-width: 50vw;
     padding: 25px;
 }
 h1{
     color:black;
+}
+p{
+    text-align: center;
+}
+
+#contenedorNoticia{
+    display: flex;
+    text-align: left;
+}
+
+#saltoPostFuente{
+    display: none;
+}
+@media screen and (max-width: 1000px) {
+    html {
+        font-size: 3vw;
+    }
+    #verNoticia{
+        text-align: inherit;
+    }
+    #contenedorNoticia{
+        display: block;
+        text-align: left;
+    }
+    #imgContainer{
+        text-align: center;
+    }
+    #saltoPostFuente{
+        display: inline;
+    }
+    img{
+        width: 100%;
+    }
+    .box{
+        max-width: 87vw;
+        padding: 25px;
+    }
+    p{
+        text-align: center;
+        font-size: 4vw;
+    }
 }

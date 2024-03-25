@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'; // Importa OnInit
 import { DataServices } from './data.services';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -8,14 +8,14 @@ import { HeaderComponent } from './header/header.component';
 import { last } from 'rxjs';
 import { DilemmaComponent } from './dilemma/dilemma.component';
 import { Dilema, Votos } from './types';
-
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, CommonModule, FormsModule, HttpClientModule, HeaderComponent, DilemmaComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [DataServices] 
+  providers: [DataServices, CookieService] 
 })
 export class AppComponent implements OnInit { // Implementa OnInit
   //I want "Dilemma of the day" and the daily dilemma number to be displayed on the screen
@@ -28,42 +28,41 @@ export class AppComponent implements OnInit { // Implementa OnInit
 
 
   constructor(private dataService: DataServices) {
-    this.lastDilemma = { id: 0, contenido: "", id_noticia: 0, fecha_generacion: "", respuestas: [] };
+    this.lastDilemma = { id: 0, contenido: "", id_noticia: 0, fecha_generacion: "", respuestas: [] }
+
   }
   
-  public static DATABASE_URL = 'http://localhost:3000/votos';
   
   ngOnInit() {
+    this.getLastDilemma().then(() => {
+      let fecha_generacion = this.lastDilemma?.fecha_generacion;
+      let date;
+      if (fecha_generacion) {
+        date = new Date(fecha_generacion);
+        let day = date.getUTCDate();
+        let month = date.getUTCMonth() + 1;
+        date = `${day < 10 ? '0' : ''}${day}/${month < 10 ? '0' : ''}${month}`;
+      }
+      this.titulo = "Dilema Diario " + date;
+    });
     this.cargarVotos();
-    this.getLastDilemma();
-   
-    // let fecha_generacion = (this.lastDilemma as { id: number, contenido: string, id_noticia: number, fecha_generacion: string, respuestas: any[] })['fecha_generacion'];
-    let fecha_generacion = this.lastDilemma?.fecha_generacion;
-    
-    // Create a new Date object from the date string
-    let date;
-    if(fecha_generacion){date = new Date(fecha_generacion);
-    
-    // Get the day and month
-    let day = date.getUTCDate();
-    let month = date.getUTCMonth() + 1; // Months are 0-based, so add 1
-    
-    // Format the day and month
-    date = `${day < 10 ? '0' : ''}${day}/${month < 10 ? '0' : ''}${month}`;
-  }
-    this.titulo = "Dilema Diario " +date;
     
   }
 
-  getLastDilemma(): void {
-    this.dataService.getLastDilemma().subscribe(
-      (data) => {
-        this.lastDilemma = data[0];
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+  getLastDilemma(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.dataService.getLastDilemma().subscribe(
+        (data) => {
+          console.log("OBTENIDO:  ", data)
+          this.lastDilemma = data[0];
+          resolve(data);
+        },
+        (error) => {
+          console.error(error);
+          reject(error);
+        }
+      );
+    });
   }
   
 
@@ -73,10 +72,10 @@ export class AppComponent implements OnInit { // Implementa OnInit
     this.dataService.cargarVotos().subscribe({
       next: (votos) => {
         this.votos = votos ; // Asegúrate de asignar 0 si es null/undefined
-        console.log(this.votos);
       },
       error: (error) => console.error("Error al cargar votos: ", error)
     });
+    console.log("VOTOS CARGADOS: ",this.votos);
   }
 
   actualizarVotos() {

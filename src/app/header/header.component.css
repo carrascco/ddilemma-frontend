@@ -46,3 +46,21 @@
     margin-left: 25vw;
   }
 
+
+  @media screen and (max-width: 1000px) {
+    .daily-title{
+      font-size: 7vw;
+    }
+    .dilemma-title {
+      font-size: 7vw;
+      margin-left: 41vw;
+    }
+    .header-logo {
+      position: absolute;
+      height: 22vw;
+      object-fit: contain;
+      margin-top: 9vw;
+    }
+
+
+  }

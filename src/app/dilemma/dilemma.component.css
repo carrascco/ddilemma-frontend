@@ -5,6 +5,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
+    text-align: justify;
+    hyphens: auto;
    }
   
  button.clicked > h1{
@@ -99,4 +101,14 @@
     100%{
         width: 100%;
     }
+    
+}
+
+
+@media screen and (max-width: 1000px) {
+.btn{
+  font-size:4vw;
+  width: 100%;
+}
+
 }

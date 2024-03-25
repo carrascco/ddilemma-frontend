@@ -6,7 +6,7 @@
     <div class="btn-container">
         <button *ngFor="let button of buttons; let i=index" 
         class="btn" 
-        [class.clicked]="clickedButton === button" 
+        [class.clicked]="clickedButton === button.text" 
         [class.no-hover]="buttonClicked" 
         (click)="clickRespuesta(button)">
             {{ button.text }}
