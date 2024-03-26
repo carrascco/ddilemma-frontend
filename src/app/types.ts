@@ -21,3 +21,9 @@ export interface Dilema {
     votosC: number
     votosD: number
   }
+
+  export interface Comentario {
+    usuario : string
+    contenido : string
+    fecha : string
+  }

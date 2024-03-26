@@ -86,7 +86,11 @@ export class DilemmaComponent implements OnChanges {
       return;
     }
     let totalVotos = this.votosNumber.reduce((a, b) => a + b, 0);
+    console.log("VOTOS NUMBER:  ", this.votosNumber);
+    console.log("VOTOS TOTAL:  ", totalVotos);    
     this.votosNumber.forEach((element: any, index: number) => {
+      console.log(index)
+      if(index>=this.buttons.length) return;
       this.buttons[index].percentage = parseFloat(
         ((element / totalVotos) * 100).toFixed(2)
       );
@@ -127,7 +131,21 @@ export class DilemmaComponent implements OnChanges {
     if (enviar) {
       this.sendVotos();
     }
+    setTimeout(() => {
+      this.scrollIntoPercentages();
+    }
+    , 250);
   }
+//   setTimeout(() => {
+//     this.scrollIntoNoticia();
+//   }, 500);
+
+// }
+
+scrollIntoPercentages() {
+  const elemento = document.getElementById('app-noticia');
+  elemento?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 
   sendVotos() {
     //Send the new votes to the server

@@ -1,0 +1,23 @@
+<div class="box">
+    <div id="heading">
+        <h1>¡Comparte tu opinión!</h1>
+    </div>
+    <form [class.larger]="showAdditionalInputs" class="item" >
+    
+        <div class="item" *ngIf="showFirstInput" >
+            <i class="fas fa-user-circle fa-3x user-icon" style="flex: auto;"></i>
+            <input type="text" id="comment-input" name="comment" placeholder="Escribe un comentario" (click)="toggleInputs()" style="flex: auto;">
+        </div>
+        <div class="item" *ngIf="showAdditionalInputs">
+                <i class="fas fa-user-circle fa-3x user-icon" style=" flex:none;"></i>
+                <input type="text" id="name-input" name="name" placeholder="Escribe tu nombre" style="flex:none;" (blur)="onNameBlur()">    
+            
+            <textarea id="comment-textarea" name="comment" rows="4" cols="50" placeholder="Escribe tu comentario aquí" style="display: block;" (blur)="onCommBlur()"></textarea>
+        </div>
+    </form>
+    <hr>
+</div>
+
+<button class="btn" (click)="cargarComments()">Cargar Comentarios</button>
+
+

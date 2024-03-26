@@ -3,11 +3,12 @@ import { DataServices } from '../data.services';
 import { CommonModule } from '@angular/common';
 import { Noticia } from '../types';
 import { Router } from '@angular/router';
+import { CommentsComponent } from '../comments/comments.component';
 
 @Component({
   selector: 'app-noticia',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CommentsComponent],
   templateUrl: './noticia.component.html',
   styleUrl: './noticia.component.css', 
   providers: [DataServices]
@@ -43,7 +44,7 @@ export class NoticiaComponent {
     console.log(this.noticia);
     setTimeout(() => {
       this.scrollIntoNoticia();
-    }, 500);
+    }, 250);
   
   }
 

@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, Observable, of } from 'rxjs'; // Importa operadores RxJS según sea necesario
-import { Dilema, Noticia, Votos } from "./types";
+import { Comentario, Dilema, Noticia, Votos } from "./types";
 import { environment } from "../environment/environment";
 
 @Injectable({
@@ -50,7 +50,7 @@ export class DataServices {
   }
 
   // // ---------------------COMENTARIOS---------------------
-  // getComentarios():Observable<Comentario[]>{
-  //   return this.httpClient.get<Comentario[]>(this.apiUrl+'comentarios');
-  // }
+  getComentarios():Observable<Comentario[]>{
+    return this.httpClient.get<Comentario[]>("https://dailydilemma-61ac8-default-rtdb.europe-west1.firebasedatabase.app/comments.json");
+  }
 }

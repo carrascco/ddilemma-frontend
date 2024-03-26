@@ -72,10 +72,10 @@ export class AppComponent implements OnInit { // Implementa OnInit
     this.dataService.cargarVotos().subscribe({
       next: (votos) => {
         this.votos = votos ; // Asegúrate de asignar 0 si es null/undefined
+        console.log("VOTOS CARGADOS: ",this.votos);
       },
       error: (error) => console.error("Error al cargar votos: ", error)
     });
-    console.log("VOTOS CARGADOS: ",this.votos);
   }
 
   actualizarVotos() {
