@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DataServices } from '../data.services';
 import { CommonModule } from '@angular/common';
+import { Comentario, Dilema } from '../types';
 
 @Component({
   selector: 'app-comments',
@@ -11,13 +12,22 @@ import { CommonModule } from '@angular/common';
   providers: [DataServices]
 })
 export class CommentsComponent {
-[x: string]: any;
+  @Input() dilemma: Dilema ={
+    contenido: '',
+    fecha_generacion: '',
+    id_noticia: 0,
+    respuestas: [],
+    votos: [],
+    comentarios: []
+  };
+  fechaToText:string='';
 
+  comentarios: Comentario[]=[];
   constructor(private dataService: DataServices) { }
+  
+  ngOnChanges(){
+ }
 
-  cargarComments (){
-    console.log(this.dataService.getComentarios());
-  }
 
   showFirstInput: boolean = true;
   showAdditionalInputs: boolean = false;
@@ -63,5 +73,32 @@ export class CommentsComponent {
         }
       }
     }, 100);
+  }
+  postComentario(){
+    const inputElement = document.getElementById('name-input') as HTMLInputElement;
+    const textAreaElement = document.getElementById('comment-textarea') as HTMLTextAreaElement;
+    if (inputElement && textAreaElement) {
+      const name = inputElement.value.trim();
+      const comment = textAreaElement.value.trim();
+      if (name && comment) {
+        this.dataService.postComentario(name, comment, this.dilemma['fecha_generacion']);
+        this.showFirstInput = true;
+        this.showAdditionalInputs = false;
+        inputElement.value = '';
+        textAreaElement.value = '';
+        }
+      
+    }
+  }
+  fechaToString(fechastr:string){
+    const fecha = new Date(fechastr);
+    const day = fecha.getDate();
+    console.log(this.dilemma.fecha_generacion)
+    const month = fecha.getMonth() + 1;
+    const year = fecha.getFullYear();
+    const hours = fecha.getHours();
+    const minutes = fecha.getMinutes();
+    return `${day < 10 ? '0' + day : day}-${month < 10 ? '0' + month : month}-${year} a las ${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}`;
+   
   }
 }

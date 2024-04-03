@@ -3,7 +3,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { AppComponent } from '../app.component';
 import { DataServices } from '../data.services';
 import { NoticiaComponent } from '../noticia/noticia.component';
-import { Dilema, Votos } from '../types';
+import { Dilema } from '../types';
 import { CookieService } from 'ngx-cookie-service';
 
 
@@ -24,12 +24,8 @@ interface Button {
 })
 export class DilemmaComponent implements OnChanges {
   @Input() dilemma: Dilema;
-  idDilemma: number = 0;
+  idDilemma: string = '';
 
-  @Input() votos: Votos = { votosA: 0, votosB: 0, votosC: 0, votosD: 0 };
-
-  //votosNumber se usa para guardar los votos como un array de numeros
-  votosNumber: number[] = [];
 
   respuestas: any[] = [];
   dilema: string = 'Dilema de la semana';
@@ -38,26 +34,27 @@ export class DilemmaComponent implements OnChanges {
   buttonClicked: boolean = false;
 
   buttons: Button[] = [];
+  votos: number[] = [0, 0, 0, 0];
 
   constructor(
     private cookieSvc: CookieService,
     private dataService: DataServices
   ) {
     this.dilemma = {
-      id: 0,
       contenido: '',
       id_noticia: 0,
       fecha_generacion: '',
       respuestas: [],
+      votos: [0, 0, 0, 0],
+      comentarios: []
     };
   }
 
   ngOnChanges(): void {
     //At UTC+0, all the cookies are reset
-    const currentDate = new Date();
-    const day = currentDate.getDate();
-    const month = currentDate.getMonth() + 1;
-    if (this.cookieSvc.get('date') !== `${day}/${month}`){
+    
+    if (this.dilemma.fecha_generacion&&(this.cookieSvc.get('date') !== this.dilemma['fecha_generacion'])) {
+      console.log("ENTRO A BORRAR, COMPARACIÓN: ",this.cookieSvc.get('date'),this.dilemma['fecha_generacion'])
       this.cookieSvc.deleteAll();
     }
 
@@ -66,13 +63,10 @@ export class DilemmaComponent implements OnChanges {
     if (this.buttons.length == 0) {
       this.insertRespuestas();
     }
-    this.idDilemma = this.dilemma['id'];
+    this.idDilemma = this.dilemma['fecha_generacion'];
 
-    this.votosNumber[0] = this.votos['votosA'];
-    this.votosNumber[1] = this.votos['votosB'];
-    this.votosNumber[2] = this.votos['votosC'];
-    this.votosNumber[3] = this.votos['votosD'];
-
+    this.votos=this.dilemma['votos'];
+    
     if (this.cookieSvc.get('voted') === 'true') {
       this.clickRespuesta(this.cookieSvc.get('respuesta'));
     }
@@ -85,11 +79,8 @@ export class DilemmaComponent implements OnChanges {
     if (this.buttons.length === 0) {
       return;
     }
-    let totalVotos = this.votosNumber.reduce((a, b) => a + b, 0);
-    console.log("VOTOS NUMBER:  ", this.votosNumber);
-    console.log("VOTOS TOTAL:  ", totalVotos);    
-    this.votosNumber.forEach((element: any, index: number) => {
-      console.log(index)
+    let totalVotos = this.votos.reduce((sum, value) => sum + value, 0);
+    this.votos.forEach((element: any, index: number) => {
       if(index>=this.buttons.length) return;
       this.buttons[index].percentage = parseFloat(
         ((element / totalVotos) * 100).toFixed(2)
@@ -112,10 +103,11 @@ export class DilemmaComponent implements OnChanges {
     if (this.cookieSvc.get('voted') !== 'true') {
       this.cookieSvc.set('voted', 'true');
       const currentDate = new Date();
+      
       const day = currentDate.getDate();
       const month = currentDate.getMonth() + 1;
       this.cookieSvc.set('respuesta', respuesta.text);
-      this.cookieSvc.set('date', `${day}/${month}`);
+      this.cookieSvc.set('date', this.dilemma['fecha_generacion']);
       this.clickedButton = respuesta.text;
       enviar=true;
     } else {
@@ -126,7 +118,7 @@ export class DilemmaComponent implements OnChanges {
     this.percentage = respuesta.percentage;
 
     //Manejar nuevo voto
-    this.votosNumber[this.buttons.indexOf(respuesta)]++;
+    this.votos[this.buttons.indexOf(respuesta)]++;
     this.calculatePercentages();
     if (enviar) {
       this.sendVotos();
@@ -149,12 +141,8 @@ scrollIntoPercentages() {
 
   sendVotos() {
     //Send the new votes to the server
-    this.votos.votosA = this.votosNumber[0];
-    this.votos.votosB = this.votosNumber[1];
-    this.votos.votosC = this.votosNumber[2];
-    this.votos.votosD = this.votosNumber[3];
-
-    this.dataService.actualizarVotos(this.votos).subscribe({
+    
+    this.dataService.updateVotos(this.dilemma['fecha_generacion'],this.votos).subscribe({
       next: (votos) => {},
       error: (error) => console.error('Error al actualizar votos: ', error),
     });

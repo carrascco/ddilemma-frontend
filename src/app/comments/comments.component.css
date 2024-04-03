@@ -21,33 +21,31 @@
   h1{
     color:#0F2E52;
   }
+
+  .btn{
+    width: 14.927vw;
+    font-size: 1.5vw;
+  }
+
   .item {
     min-height: 5vw;
     display: block;
     align-items: center;
-    border-bottom: 0.2vw solid #F1F1F1;
   }
   .larger{
     /* min-height: 15vw; */
 
   }
-  /* .item {
-    display: flex; /* Cambiar de block a flex 
-    align-items: center; /* Asegurar alineación vertical al centro 
-    justify-content: start; 
-    border-bottom: 1px solid #F1F1F1;
-    padding: 10px; /
-  } */
-
-  .item:last-child {
-    border-bottom: 0;
-  }
+ 
   
   
   input {
     margin: 0px;
     margin-left: 1vw;
     
+}
+hr{
+  margin-bottom: 1vw;
 }
 
   textarea{
@@ -69,23 +67,7 @@
     text-align: left;
     margin-left: 20px;
   }
-  
-
-
-  .buttonRed {
-    min-height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    border-color: transparent;
-    background-color: red;
-    color: #fff;
-    font-size: 30px;
-    padding-bottom: 6px;
-    border-width: 0;
-    margin-left: 5px;
-    margin-right: 5px;
-  }
-  
+    
   input[type="text"] {
     text-align: left;
     height: 60px;
@@ -98,7 +80,22 @@
     max-width: 80%;
     box-shadow: 0px 0px 5px 2px rgba(128, 128, 128, 0.5);
   }
-
+  p{
+    text-align: left;
+    height: 60px;
+    top: 10px;
+    border: none;
+    background: transparent;
+    font-size: 1vw;
+    font-weight: 200;
+    width: 80%;
+    max-width: 80%;
+  }
+  article{
+    font-size: 0.85vw; margin-left: 4vw;
+    margin-bottom: 1.5vw;
+    margin-top: 1vw;
+  }
   /* input[type="text"] {
     /* Eliminar margen que empuja los inputs hacia abajo */
     /* margin: 0; En lugar de margin: 20px */
@@ -112,5 +109,70 @@
   ::placeholder {
     color: grey;
     opacity: 1;
+  }
+  
+  .comments  {
+    text-align: left;
+    margin-left: 1vw;
+    margin-top: 0.75vw;
+  }
+  #iSpan{
+    font-size: 0.95vw;
+                    opacity: 0.6;
+                    margin-left: 1vw;
+                    margin-right: 0.4vw;
+  }
+  #spanSpan{
+    font-size: 0.95vw; opacity: 0.6;
+  }
+
+  @media screen and (max-width: 1000px) {
+    i{
+      font-size: 7vw;
+    }
+    .btn{
+      font-size:4vw;
+      width: 100%;
+    }
+    .box {
+      max-width: 87vw;
+      padding: 25px;
+      padding-bottom: 5vw;
+    }
+    .comments{
+      padding-top: 5vw;
+    }
+    p{
+      font-size: 4vw;
+    }
+    h1{
+      font-size: 6vw;
+    }
+    
+    span{
+      font-size: 4vw;
+    
+    }
+    input[type="text"] {
+      font-size: 4vw;
+    }
+    textarea{
+      font-size: 4vw;
+      margin-top: 6vw;
+      margin-left: 7.5vw;
+    }
+    #iSpan{
+      font-size: 4vw;
+    }
+    #spanSpan{
+      font-size: 3vw;
+    }
+    article{
+      font-size: 4vw;
+    }
+    hr{
+      
+      margin-top: 5vw;
+    }
   }
   

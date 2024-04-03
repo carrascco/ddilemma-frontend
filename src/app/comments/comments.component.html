@@ -10,14 +10,32 @@
         </div>
         <div class="item" *ngIf="showAdditionalInputs">
                 <i class="fas fa-user-circle fa-3x user-icon" style=" flex:none;"></i>
-                <input type="text" id="name-input" name="name" placeholder="Escribe tu nombre" style="flex:none;" (blur)="onNameBlur()">    
-            
-            <textarea id="comment-textarea" name="comment" rows="4" cols="50" placeholder="Escribe tu comentario aquí" style="display: block;" (blur)="onCommBlur()"></textarea>
+                <input type="text" id="name-input" name="name" placeholder="Escribe tu nombre" style="flex:none;" (blur)="onNameBlur()"
+                    required>
+                
+                <textarea id="comment-textarea" name="comment" rows="4" cols="50" placeholder="Escribe tu comentario aquí"
+                    style="display: block;" (blur)="onCommBlur()" required></textarea>
+                <div class="btn-container" style="  max-width: 90%;">
+                    <button type="submit" class="btn clicked"  (click)="postComentario()">Enviar</button>
+                </div>
         </div>
     </form>
-    <hr>
+    <div class="comments item" *ngFor="let comment of this.dilemma['comentarios'] " style="text-align: left;   padding-bottom: 1vw;">
+        <div style="display: flex;">    
+        <i class="fas fa-user-circle fa-3x user-icon" ></i>
+        
+            <h3 class="user-icon" style="margin-left: 1vw; margin-top: 0.75vw;">{{comment.usuario}}
+                <span>
+                    <i class="fas fa-calendar-alt" id="iSpan"></i>
+                    <span id="spanSpan">{{fechaToString(comment.fecha)}}</span>
+                </span>
+            </h3> 
+            
+        </div>
+            <article
+            >{{comment.contenido}}</article>
+        
 </div>
 
-<button class="btn" (click)="cargarComments()">Cargar Comentarios</button>
 
 

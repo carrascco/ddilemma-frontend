@@ -9,9 +9,17 @@ p{
     text-align: center;
 }
 
+img{
+    width: auto;
+    max-height: 20vw;
+    height: auto;
+}
+
 #contenedorNoticia{
     display: flex;
     text-align: left;
+    font-size: 0.85vw;
+    font-weight: 400;
 }
 
 #saltoPostFuente{
@@ -27,6 +35,8 @@ p{
     #contenedorNoticia{
         display: block;
         text-align: left;
+        font-size: 30px;
+        
     }
     #imgContainer{
         text-align: center;
@@ -34,9 +44,11 @@ p{
     #saltoPostFuente{
         display: inline;
     }
-    img{
-        width: 100%;
-    }
+    img {
+        width: auto;
+        max-height: 37vw;
+        height: auto;
+      }
     .box{
         max-width: 87vw;
         padding: 25px;
@@ -44,5 +56,12 @@ p{
     p{
         text-align: center;
         font-size: 4vw;
+    }
+    a{
+        max-width: 90vw;    display: block;
+    }
+    .btn{
+        font-size: 5vw;
+        width: 100%;
     }
 }

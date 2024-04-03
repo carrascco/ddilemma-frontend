@@ -1,9 +1,10 @@
 export interface Dilema {
-    id: number
     contenido: string
-    respuestas: string[]
     fecha_generacion: string
     id_noticia: number
+    respuestas: string[]
+    votos: number[]
+    comentarios: Comentario[]
   }
 
   export interface Noticia {
@@ -13,13 +14,6 @@ export interface Dilema {
     cuerpo: string
     fuente: string
     url_imagen: string  
-  }
-
-  export interface Votos {
-    votosA: number
-    votosB: number
-    votosC: number
-    votosD: number
   }
 
   export interface Comentario {

@@ -11,17 +11,23 @@
     <h1>{{noticia.titulo}}</h1>
     <div id="contenedorNoticia" >
         <div style="flex: 1;">
-            <article>{{noticia.cuerpo}}</article>
-            <p>{{noticia.fuente}}</p> 
+            <!-- <article>{{noticia.cuerpo}}</article> -->
+            <article>{{parrafo1}}</article> 
+            <br>
+            <div id="imgContainer" style="text-align: center; flex: 0.5; justify-content: center; allign-items: center; padding-left: 2vw;">
+                <img src="{{noticia.url_imagen}}" alt="imagen noticia">
+            </div>
+            <br>
+            <article>{{parrafo2}}</article> 
             <br id="saltoPostFuente">
         </div>
-        <div id="imgContainer" style="flex: 0.5; justify-content: center; allign-items: center; padding-left: 2vw;">
-            <img src="{{noticia.url_imagen}}" alt="imagen noticia" style="width: 60%; height: auto;">
-        </div>
+        <!-- <div id="imgContainer" style="flex: 0.5; justify-content: center; allign-items: center; padding-left: 2vw;">
+            <img src="{{noticia.url_imagen}}" alt="imagen noticia" style="width: 100%; height: auto;">
+        </div> -->
     </div>
     <p>Mira la noticia completa en:</p>
-    <a href="{{noticia.url}}" target="_blank">{{noticia.url}}</a>
+    <a href="{{noticia.url}}" target="_blank">{{noticia.fuente}} - {{noticia.titulo}}</a>
     
 </div>
 
-<app-comments></app-comments>
+<app-comments *ngIf="viewNoticia" [dilemma]="dilemma"></app-comments>
