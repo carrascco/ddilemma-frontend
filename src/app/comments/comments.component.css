@@ -126,6 +126,12 @@ hr{
     font-size: 0.95vw; opacity: 0.6;
   }
 
+  .comments-container {
+    max-height: 35vw;
+    overflow-y: auto;
+  }
+  
+
   @media screen and (max-width: 1000px) {
     i{
       font-size: 7vw;
@@ -173,6 +179,9 @@ hr{
     hr{
       
       margin-top: 5vw;
+    }
+    .comments-container {
+      max-height: 65vw;
     }
   }
   

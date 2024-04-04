@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 import { DataServices } from '../data.services';
 import { CommonModule } from '@angular/common';
 import { Comentario, Dilema } from '../types';
+import { SharingComponent } from '../sharing/sharing.component';
 
 @Component({
   selector: 'app-comments',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SharingComponent],
   templateUrl: './comments.component.html',
   styleUrl: './comments.component.css',
   providers: [DataServices]

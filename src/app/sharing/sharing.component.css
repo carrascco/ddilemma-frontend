@@ -1,0 +1,55 @@
+.sharing-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sharing-buttons > .btn {
+    border-radius: 50%; /* Esto creará un círculo perfecto */
+    width: 100px; /* Ancho fijo */
+    height: 100px; /* Alto fijo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none; /* En caso de que no quieras bordes */
+    padding: 0; /* Elimina el padding para que la imagen pueda llenar el botón */
+    margin: 0 2vw;
+    margin-bottom: 3vw;
+}
+
+.sharing-buttons > .btn img {
+    width: 55%; /* Esto hará que la imagen sea el 80% del tamaño del botón */
+    height: auto; /* Esto mantendrá la proporción de la imagen */
+}
+#whatsappBtn{
+    width: 80%;
+}
+
+.box{
+    padding-top: 0.75vw;
+  padding-bottom: 0.75vw;
+  border-radius: 7vw;
+  max-width: 30vw;
+}
+
+h2{
+    color:#0F2E52;
+}
+
+.btn:hover {
+    background-color: white;    
+}
+
+@media screen and (max-width: 1000px) {
+    
+    .box{
+        max-width: 75vw;
+    }
+    .box {
+        margin-bottom: 10vw;
+      }
+      .sharing-buttons > .btn{
+        width: 17vw;
+        height: 17vw;
+      }
+}
