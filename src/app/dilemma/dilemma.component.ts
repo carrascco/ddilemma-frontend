@@ -5,6 +5,8 @@ import { DataServices } from '../data.services';
 import { NoticiaComponent } from '../noticia/noticia.component';
 import { Dilema } from '../types';
 import { CookieService } from 'ngx-cookie-service';
+import { MenuComponent } from '../menu/menu.component';
+import { ActivatedRoute } from '@angular/router';
 
 
 interface Button {
@@ -20,13 +22,14 @@ interface Button {
   templateUrl: './dilemma.component.html',
   styleUrl: './dilemma.component.css',
   providers: [DataServices, NoticiaComponent],
-  imports: [CommonModule, AppComponent, NoticiaComponent],
+  imports: [CommonModule, AppComponent, NoticiaComponent, MenuComponent],
 })
 export class DilemmaComponent implements OnChanges {
   @Input() dilemma: Dilema;
+  @Input() allDilemmas: Dilema[]=[];
+
   idDilemma: string = '';
-
-
+  showMenuButton: boolean = false;
   respuestas: any[] = [];
   dilema: string = 'Dilema de la semana';
 
@@ -51,13 +54,14 @@ export class DilemmaComponent implements OnChanges {
   }
 
   ngOnChanges(): void {
-    //At UTC+0, all the cookies are reset
-    
-    if (this.dilemma.fecha_generacion&&(this.cookieSvc.get('date') !== this.dilemma['fecha_generacion'])) {
-      console.log("ENTRO A BORRAR, COMPARACIÓN: ",this.cookieSvc.get('date'),this.dilemma['fecha_generacion'])
-      this.cookieSvc.deleteAll();
-    }
 
+    if (!window.location.href.includes('/dilema')) {
+      if (this.dilemma.fecha_generacion&&(this.cookieSvc.get('date') !== this.dilemma['fecha_generacion'])) {
+        console.log("ENTRO A BORRAR, COMPARACIÓN: ",this.cookieSvc.get('date'),this.dilemma['fecha_generacion'])
+        this.cookieSvc.deleteAll();
+      }
+    }else{this.showMenuButton=true;}
+    
     this.respuestas = this.dilemma['respuestas'];
     this.dilema = this.dilemma['contenido'];
     if (this.buttons.length == 0) {
@@ -67,9 +71,17 @@ export class DilemmaComponent implements OnChanges {
 
     this.votos=this.dilemma['votos'];
     
-    if (this.cookieSvc.get('voted') === 'true') {
-      this.clickRespuesta(this.cookieSvc.get('respuesta'));
-    }
+      if (this.cookieSvc.get('voted') === 'true' && this.dilemma!==undefined && this.dilemma!==null && !window.location.href.includes('/dilema')) {
+          this.clickRespuesta(this.cookieSvc.get('respuesta'), false);
+      }
+      if(window.location.href.includes('/dilema')){
+        console.log("SHOWMENUBUTTON A TRUE");
+        this.showMenuButton=true;
+        if(this.buttonClicked==false){
+          this.clickRespuesta(this.cookieSvc.get('respuesta'), false);
+        }
+      }
+    
     // if (this.votosNumber.length > 0 && this.percentage !== undefined) {
     //   this.calculatePercentages();
     // }
@@ -98,7 +110,8 @@ export class DilemmaComponent implements OnChanges {
 
   percentage: number = 0;
 
-  clickRespuesta(respuesta: any) {
+  clickRespuesta(respuesta: any, reallyAClick: boolean = true) {
+    console.log("ENTRO EN clickRespuesta");
     let enviar =false;
     if (this.cookieSvc.get('voted') !== 'true') {
       this.cookieSvc.set('voted', 'true');
@@ -114,17 +127,26 @@ export class DilemmaComponent implements OnChanges {
       
       this.clickedButton = respuesta;
     }
-    this.buttonClicked = true;
+
+    if (reallyAClick || !window.location.href.includes('/dilema') ) {
+      this.buttonClicked = true;
+      this.showMenuButton=true;
+    }
     this.percentage = respuesta.percentage;
 
     //Manejar nuevo voto
     this.votos[this.buttons.indexOf(respuesta)]++;
     this.calculatePercentages();
-    if (enviar) {
+    if (!this.votoEnviado && (enviar || window.location.href.includes('/dilema') && reallyAClick)) {
+      setTimeout(() => {
       this.sendVotos();
+      this.votoEnviado = true;
+      }, 500);
     }
     setTimeout(() => {
       this.scrollIntoPercentages();
+      console.log("Variable clickedButton= ",this.clickedButton);
+      
     }
     , 250);
   }
@@ -133,15 +155,21 @@ export class DilemmaComponent implements OnChanges {
 //   }, 500);
 
 // }
+votoEnviado: boolean = false;
 
 scrollIntoPercentages() {
   const elemento = document.getElementById('app-noticia');
   elemento?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-  sendVotos() {
-    //Send the new votes to the server
-    
+
+isMenuOpen = false;
+  
+handleMenuToggle(isOpen: boolean) {
+  this.isMenuOpen = isOpen;
+}
+
+sendVotos() {
     this.dataService.updateVotos(this.dilemma['fecha_generacion'],this.votos).subscribe({
       next: (votos) => {},
       error: (error) => console.error('Error al actualizar votos: ', error),

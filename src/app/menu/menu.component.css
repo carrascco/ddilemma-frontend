@@ -1,0 +1,151 @@
+
+div > h2{
+  color:#0F2E52;
+  margin-top:-1vw;
+  margin-bottom: -0.5vw;
+}
+
+.container {
+    position: fixed;
+    top: 50%;
+    right: -24.25vw;
+    transform: translateY(-50%);
+    margin-right: -1vw;
+  }
+  .moving{
+    top: 25%;
+    right: -23.3vw;
+    animation: move 2s ease-in-out infinite; /* Aplica la animación */
+  }
+  
+  .btn2 {
+    background-color: #ffffff;
+    color: black;
+    border: none;
+    border-radius: 1.042vw 0 0 1.042vw;
+    cursor: pointer;
+    width: 2.5vw;
+    font-size: 0.85vw;
+    text-align: center;
+    padding: 0 10px;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+  }
+  .item {
+    min-height: 3.5vw;
+    display: block;
+    align-items: center;
+    padding-top: 1vw;
+  }
+  .menu {
+    background-color: white; 
+    box-shadow: 0 0.2vw 0.4vw rgba(0, 0, 0, 0.1);
+    border-radius: 1.042vw 0 0 1.042vw;
+    padding: 1vw;
+    transition: transform 0.3s;
+    z-index: 1;
+    width: 23vw;
+    max-width: 23vw;
+    max-height: 25vw;
+    overflow: auto;
+  }
+  a {
+    color: #0F2E52; 
+    text-decoration: none; /* Elimina subrayado */
+    transition: color 0.3s; 
+  }
+  
+  a:hover {
+    color: #4EC8DF; 
+  }
+  
+  .btn-menu-container {
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease; 
+  }
+  
+  .container.show-menu .menu {
+    transform: translateX(0);
+  }
+  
+  .container.show-menu .btn-menu-container {
+    transform: translateX(-90%);
+  }
+  @keyframes move {
+    0%, 100% {
+      transform: translateX(0); /* Inicia en la posición original */
+    }
+    50% {
+      transform: translateX(25px); /* Mueve el div 20 píxeles a la derecha */
+    }
+  }
+  
+  @media only screen and (max-width: 1000px) {
+    div > h2 {
+      color: #0F2E52;
+      margin-top: -5vw; /* Ajuste de márgenes para móviles */
+      margin-bottom: -2.5vw;
+    }
+  
+    .container {
+      position: fixed;
+      top: 50%;
+      right: -148vw;
+      transform: translateX(-50%);
+      width: 80%; 
+    }
+  
+    .moving {
+      top: 25%;
+      animation: move 2s ease-in-out infinite;
+    }
+  
+    .btn2 {
+      border-radius: 5px; /* Ajuste de bordes redondeados para mejor tacto */
+      cursor: pointer;
+      width: auto; /* Permitir que el botón crezca con el texto */
+      font-size: 4vw; /* Aumentar el tamaño de la fuente para mejor lectura */
+      padding: 10px 20px; /* Aumentar el padding para mejor clicabilidad */
+    }
+  
+    .item {
+      min-height: 8vw; /* Aumentar la altura mínima para mejores toques */
+      padding-top: 2vw;
+    }
+  
+    .menu {
+      border-radius: 5px; /* Ajuste del borde redondeado */
+      padding: 5%; /* Aumentar padding */
+      width: 80%; /* Ajuste del ancho del menú */
+      max-width: 80%; /* Asegurarse de que el menú no exceda el 80% del ancho */
+      max-height: 50vh; /* Limitar la altura máxima para evitar el desbordamiento */
+      overflow: auto;
+    }
+  
+    a {
+      font-size: 4vw; /* Aumentar el tamaño de la fuente de los enlaces para facilitar la lectura */
+    }
+  
+    .btn-menu-container {
+      transform: translateX(-100%); /* Ajuste para que el botón se desplace completamente fuera */
+    }
+  
+    .container.show-menu .menu {
+      transform: translateX(0); /* Asegurar que el menú se muestre completamente */
+    }
+  
+    .container.show-menu .btn-menu-container {
+      transform: translateX(-100%); /* Ajustar el desplazamiento del botón */
+    }
+  
+    @keyframes move {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      50% {
+        transform: translateX(15px); /* Reducir la distancia de movimiento para móviles */
+      }
+    }
+  }
+  

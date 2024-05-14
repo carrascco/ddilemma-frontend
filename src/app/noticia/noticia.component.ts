@@ -36,7 +36,7 @@ export class NoticiaComponent {
     this.noticia = { id: 0, url: "", titulo: "", cuerpo: "", fuente: "", url_imagen: "" };
   }
 
-  ngOnChanges() {
+  ngOnInit() {
     this.retrieveNoticia();
   }
 
@@ -63,7 +63,8 @@ export class NoticiaComponent {
   }
 
   scrollIntoNoticia() {
-    const elemento = document.getElementById('noticiaElement');
+    const elemento = document.getElementById('verNoticia');
     elemento?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
   }
 }

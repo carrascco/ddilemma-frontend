@@ -1,0 +1,14 @@
+<div class="container" [class.show-menu]="showMenu" [class.moving]="movingAnimation">
+    <div class="btn-menu-container">
+      <button class="btn2" (click)="toggleMenu()"><h2>{{ showMenu ? '>' : '<' }}</h2></button>
+      <div class="menu">
+        <div class="item" >
+          <h2>¡Visita los dilemas pasados!</h2>
+        </div>
+        <div class="item" *ngFor="let dilema of allDilemmas">
+            <a href="/dilema/{{ dilema.fecha_generacion }}"  (click)="toggleMenu()">{{ getTitleOfDilemma(dilema) }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,19 @@
+.home-icon {
+    position: fixed;
+    top: 9vw;
+  left: 3vw;
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    font-size: 35px; /* Tamaño del icono */
+    color: #0F2E52; /* Color del icono */
+    text-decoration: none; /* Elimina subrayado del enlace */  
+    width: 5vw;
+    height: auto;
+  }
+  
+  .home-icon:hover {
+    color: white; /* Color del icono al pasar el mouse */
+  }
+
+  .disappear{
+    display: none;
+  }

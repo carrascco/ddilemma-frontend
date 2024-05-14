@@ -37,45 +37,14 @@
     background-color: #0F2E52;
   }
 
-/* .progress-bar{
-    position:relative;
-    height:3em;
-    background-color: #111;
-    border-radius: 1.5em;
-    color:white;
-
-}
-.progress-bar::before{
-    content: attr(data-label);
-    display: flex;
-    align-items: center;
-    position: absolute;
-    left: .5em;
-    top: .5em;
-    bottom: .5em;
-    width: var(--width,0);
-    min-width: 1rem;
-    max-width: calc(100% - 1em);
-    background-color: #069;
-    border-radius: 1em;
-    padding:1em; 
-    transition: width 2s ease-in-out; /* Add this line */
-
-
-
-/* .progress-container {
-    width: 100%;
-    background-color: #f1f1f1;
+  .button-container {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    margin-right: -1vw;
   }
   
-  .progress-bar {
-    height: 30px;
-    background-color: #4caf50;
-    text-align: center;
-    line-height: 30px;
-    color: white;
-  }
-     */
 
 
 .line-box{
@@ -101,7 +70,6 @@
     100%{
         width: 100%;
     }
-    
 }
 
 

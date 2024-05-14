@@ -21,7 +21,9 @@
             </div>
         </div>
     </form>
-    <div class="comments item" *ngFor="let comment of this.dilemma['comentarios'] "
+
+    <!----------------------- COMENTARIOS ----------------------->
+    <div class="comments item" *ngFor="let comment of this.dilemma['comentarios']; let i = index"
         style="text-align: left;   padding-bottom: 1vw;">
         <div style="display: flex;">
             <i class="fas fa-user-circle fa-3x user-icon"></i>
@@ -36,8 +38,42 @@
         </div>
         <article>{{comment.contenido}}</article>
 
+
+        <!----------------------- RESPUESTAS ----------------------->
+        <div class="comments ">
+            <div class="comments item replies" *ngFor="let reply of comment.respuestas"
+                style="text-align: left;   padding-bottom: 1vw;">
+                <div style="display: flex;">
+                    <i class="fas fa-user-circle fa-3x user-icon"></i>
+
+                    <h3 class="user-icon" style="margin-left: 1vw; margin-top: 0.75vw;">{{reply.usuario}}
+                        <span>
+                            <i class="fas fa-calendar-alt" id="iSpan"></i>
+                            <span id="spanSpan">{{fechaToString(reply.fecha)}}</span>
+                        </span>
+                    </h3>
+                </div>
+                <article>{{reply.contenido}}</article>
+            </div>
+
+            <button class="btn reply-btn clicked" id="replyButton" (click)="toggleInputsComments()">Responder</button>
+
+            <form class="reply-form replies" *ngIf="showReplyForm">
+                <div class="item">
+                    <i class="fas fa-user-circle fa-3x user-icon" style="flex: auto;"></i>
+                
+                    <input type="text" id="reply-input" name="reply" placeholder="Escribe tu nombre" style="flex: auto;" (blur)="onReplyBlur()">
+
+                    <textarea id="reply-textarea" name="comment" rows="4" cols="50" placeholder="Escribe tu respuesta aquí"
+                style="display: block;" (blur)="onReplyBlur()" required></textarea>
+
+                </div>
+                <div class="btn-container">
+                    <button type="submit" class="btn clicked" (click)="postReply(i)">Enviar</button>
+                </div>
+            </form>
+
+        </div>
     </div>
-    </div>
+</div>
 <app-sharing></app-sharing>
-
-

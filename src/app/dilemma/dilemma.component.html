@@ -1,12 +1,15 @@
-<div style="text-align: center;">
+<div style="text-align: center;"
+[class.blur-effect] = "isMenuOpen"
+>
     <div class="box" id="dilemmaElement"  style="color:white; background: #4EC8DF;">
         {{dilema}}
     </div>
 
     <div class="btn-container" id="btnContainer">
-        <button *ngFor="let button of buttons; let i=index" 
+        <button 
+        *ngFor="let button of buttons; let i=index" 
         class="btn" 
-        [class.clicked]="clickedButton === button.text" 
+        [class.clicked]="(clickedButton === button.text) || (clickedButton!=null && clickedButton.text === button.text)" 
         [class.no-hover]="buttonClicked" 
         (click)="clickRespuesta(button)">
             {{ button.text }}
@@ -16,6 +19,7 @@
         </button>
     
     </div>
-    
+
     <app-noticia id="app-noticia"  *ngIf="buttonClicked" [dilemma]="dilemma"></app-noticia>
 </div>
+    <app-menu class="app-menu" *ngIf="showMenuButton" [allDilemmas]="allDilemmas" (menuToggled)="handleMenuToggle($event)"></app-menu>

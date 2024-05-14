@@ -101,6 +101,11 @@ html {
   color:white;
 }
 
+
+.blur-effect {
+  filter: blur(5px); 
+}
+
 .no-hover{
   pointer-events: none;
 }

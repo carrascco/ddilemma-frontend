@@ -20,4 +20,5 @@ export interface Dilema {
     usuario : string
     contenido : string
     fecha : string
+    respuestas  : Comentario[]
   }

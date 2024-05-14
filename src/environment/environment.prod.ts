@@ -1,5 +1,15 @@
 export const environment = {
-    production: true,
-    firebaseApiUrl: 'https://dailydilemma-61ac8-default-rtdb.europe-west1.firebasedatabase.app/votos.json',
-    backendApiUrl: 'https://stark-peak-62036-bec9579aee22.herokuapp.com/'
-  };
+  production: true,
+
+
+  firebase: {
+    apiKey: process.env["apiKey"],
+    authDomain: process.env["authDomain"],
+    projectId: process.env["projectId"],
+    storageBucket: process.env["storageBucket"],
+    messagingSenderId: process.env["messagingSenderId"],
+    appId: process.env["appId"],
+    measurementId: process.env["measurementId"]
+  
+  }
+};

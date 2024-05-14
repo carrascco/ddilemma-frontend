@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 })
 export class SharingComponent {
   
-  url = 'carrascco.github.io/ddilemma-frontend/';
+  url = 'https://daily-dilemma.netlify.app/';
   text = '¡Qué interesante! 😊 Echa un vistazo al dilema de la noticia de hoy 📰🔍: \n\n';
 
   constructor() { }

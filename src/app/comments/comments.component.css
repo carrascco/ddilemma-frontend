@@ -32,6 +32,11 @@
     display: block;
     align-items: center;
   }
+
+  .item:last-child{
+    border-bottom: 0;
+  }
+  
   .larger{
     /* min-height: 15vw; */
 
@@ -130,12 +135,27 @@ hr{
     max-height: 35vw;
     overflow-y: auto;
   }
+
+  .replies{
+    margin-left: 4vw;
+    
+  }
+  #replyButton{
+    margin-left: 2.5vw;
+  width: auto;
+  font-size: 1vw;
+  }
   
 
   @media screen and (max-width: 1000px) {
     i{
       font-size: 7vw;
     }
+
+    #replyButton{
+      font-size: 4vw;
+    }
+
     .btn{
       font-size:4vw;
       width: 100%;

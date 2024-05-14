@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'; // Importa OnInit
 import { DataServices } from './data.services';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import {  RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -9,6 +9,9 @@ import { last } from 'rxjs';
 import { DilemmaComponent } from './dilemma/dilemma.component';
 import { Dilema } from './types';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from '../environment/environment';
+import { rejects } from 'assert';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +28,8 @@ export class AppComponent implements OnInit { // Implementa OnInit
   titulo = 'DailyDilemma';
 
   lastDilemma: Dilema ;
-
+  allDilemmas: Dilema[] = [];
+  isAPastDilemma: boolean = false;
 
   constructor(private dataService: DataServices) {
     this.lastDilemma = { contenido: "", id_noticia: 0, fecha_generacion: "", respuestas: [], votos: [0, 0, 0, 0], comentarios: []}
@@ -34,20 +38,38 @@ export class AppComponent implements OnInit { // Implementa OnInit
   
   
   ngOnInit() {
+    var id = this.getDilemaIdFromUrl();
+    if(id != null && id != "" && id != undefined ){
+      console.log("HAY ID EN URL")
+      this.getDilemmaById(this.getDilemaIdFromUrl()).then(() => {
+        let fecha_generacion = this.lastDilemma?.fecha_generacion;
+        let date;
+        if (fecha_generacion) {
+          date = new Date(fecha_generacion);
+          let day = date.getUTCDate();
+          let month = date.getUTCMonth() + 1;
+          date = `${day < 10 ? '0' : ''}${day}/${month < 10 ? '0' : ''}${month}`;
+        }
+        this.titulo = "Dilema Diario " + date;
+        this.isAPastDilemma=true;
+      });
+    }
+    else{
+      console.log("NO HAY ID EN URL")
+      this.getLastDilemma().then(() => {
+        let fecha_generacion = this.lastDilemma?.fecha_generacion;
+        let date;
+        if (fecha_generacion) {
+          date = new Date(fecha_generacion);
+          let day = date.getUTCDate();
+          let month = date.getUTCMonth() + 1;
+          date = `${day < 10 ? '0' : ''}${day}/${month < 10 ? '0' : ''}${month}`;
+        }
+        this.titulo = "Dilema Diario " + date;
+        
+      });
+    }
 
-    this.getLastDilemma().then(() => {
-      let fecha_generacion = this.lastDilemma?.fecha_generacion;
-      let date;
-      if (fecha_generacion) {
-        date = new Date(fecha_generacion);
-        let day = date.getUTCDate();
-        let month = date.getUTCMonth() + 1;
-        date = `${day < 10 ? '0' : ''}${day}/${month < 10 ? '0' : ''}${month}`;
-      }
-      this.titulo = "Dilema Diario " + date;
-      
-    });
-    // this.cargarVotos();
     
   }
 
@@ -57,6 +79,9 @@ export class AppComponent implements OnInit { // Implementa OnInit
         (data) => {
           
           this.lastDilemma = data[data.length-1];
+
+            this.allDilemmas = data.reverse();
+            this.allDilemmas.shift();
           resolve(data);
         },
         (error) => {
@@ -66,8 +91,35 @@ export class AppComponent implements OnInit { // Implementa OnInit
       );
     });
   }
-  
 
+  getDilemmaById(id: string): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.dataService.getLastDilemma().subscribe(
+        (data) => {
+          this.allDilemmas = data.reverse();
+          this.allDilemmas.shift();
+          var dilemaWithID = this.allDilemmas.find(dilema => dilema.fecha_generacion === id);
+          if(dilemaWithID != null){
+            this.lastDilemma = dilemaWithID;
+            resolve(dilemaWithID);
+          } else {
+            reject("Dilemma not found");
+          }
+        },
+        (error) => {
+          console.error(error);
+          reject(error);
+        }
+      );
+    });
+  }
+  
+  getDilemaIdFromUrl(): string {
+    const url = window.location.href;
+    const parts = url.split('/');
+    var id = parts[parts.length - 1]; 
+    return id;
+  }
 
 
   // cargarVotos() {

@@ -13,6 +13,7 @@ import { SharingComponent } from '../sharing/sharing.component';
   providers: [DataServices]
 })
 export class CommentsComponent {
+
   @Input() dilemma: Dilema ={
     contenido: '',
     fecha_generacion: '',
@@ -24,6 +25,11 @@ export class CommentsComponent {
   fechaToText:string='';
 
   comentarios: Comentario[]=[];
+
+  showReplyForm = false;
+  selectedCommentIndex = -1;
+
+  
   constructor(private dataService: DataServices) { }
   
   ngOnChanges(){
@@ -102,4 +108,65 @@ export class CommentsComponent {
     return `${day < 10 ? '0' + day : day}-${month < 10 ? '0' + month : month}-${year} a las ${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}`;
    
   }
+
+  replyToComment(fechaComment  : string, index:number){ 
+    const inputElement = document.getElementById('name-input') as HTMLInputElement;
+    const textAreaElement = document.getElementById('comment-textarea') as HTMLTextAreaElement;
+    if (inputElement && textAreaElement) {
+      const name = inputElement.value.trim();
+      const comment = textAreaElement.value.trim();
+      if (name && comment) {
+        this.dataService.postReply(name, comment, this.dilemma['fecha_generacion'], index);
+        this.showFirstInput = true;
+        this.showAdditionalInputs = false;
+        inputElement.value = '';
+        textAreaElement.value = '';
+        }
+      
+    }
+
+    }
+
+    postReply(index:number){
+      const inputElement = document.getElementById('reply-input') as HTMLInputElement;
+      const textAreaElement = document.getElementById('reply-textarea') as HTMLTextAreaElement;
+      if (inputElement && textAreaElement) {
+        const name = inputElement.value.trim();
+        const comment = textAreaElement.value.trim();
+        console.log("A PUNTO DE RESPONDER, INDEX: "+index+" NAME: "+name+" COMMENT: "+comment+" FECHA: "+this.dilemma['fecha_generacion'])
+        if (name && comment) {
+          this.dataService.postReply(name, comment, this.dilemma['fecha_generacion'], index);
+          this.showReplyForm = false;
+          inputElement.value = '';
+          textAreaElement.value = '';
+          }
+        
+      }
+      
+    }
+   
+    toggleInputsComments(){
+      this.showReplyForm = true;
+      setTimeout(() => {
+        const inputElement = document.getElementById('reply-input');
+        if (inputElement) {
+        inputElement.focus();
+        }
+      }, 0);
+    }
+
+
+    onReplyBlur(){
+      setTimeout(() => {
+        const inputElement = document.getElementById('reply-input') as HTMLInputElement;
+        const textAreaElement = document.getElementById('reply-textarea') as HTMLTextAreaElement;
+        if (textAreaElement && textAreaElement.value.trim() === '' && inputElement && inputElement.value.trim() === '') {
+          if (inputElement && document.activeElement === inputElement || textAreaElement && document.activeElement === textAreaElement) {
+            // Code to execute if the inputElement is focused
+          } else {
+            this.showReplyForm=false;
+          }
+        }
+      }, 100);
+    }
 }
