@@ -46,7 +46,10 @@
     margin-left: 25vw;
   }
 
-
+  .title-container {
+    display: flex;
+    justify-content: center; /* Centra el contenido en cada contenedor */
+  }
   @media screen and (max-width: 1000px) {
     .daily-title{
       font-size: 7vw;

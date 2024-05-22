@@ -28,7 +28,7 @@ export class CommentsComponent {
 
   showReplyForm = false;
   selectedCommentIndex = -1;
-
+  comentarioAResponderIndex = -1;
   
   constructor(private dataService: DataServices) { }
   
@@ -145,8 +145,9 @@ export class CommentsComponent {
       
     }
    
-    toggleInputsComments(){
+    toggleInputsComments(index:number){
       this.showReplyForm = true;
+      this.comentarioAResponderIndex = index;
       setTimeout(() => {
         const inputElement = document.getElementById('reply-input');
         if (inputElement) {

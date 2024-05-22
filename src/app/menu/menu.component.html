@@ -1,14 +1,37 @@
 <div class="container" [class.show-menu]="showMenu" [class.moving]="movingAnimation">
-    <div class="btn-menu-container">
-      <button class="btn2" (click)="toggleMenu()"><h2>{{ showMenu ? '>' : '<' }}</h2></button>
-      <div class="menu">
-        <div class="item" >
+  <div class="btn-menu-container">
+    <button class="btn2" (click)="toggleMenu()">
+      <h2>{{ showMenu ? '>' : '<' }}</h2>
+    </button>
+    <div class="menu">
+      <div id="pastDilemmas">
+        <div class="item">
           <h2>¡Visita los dilemas pasados!</h2>
         </div>
         <div class="item" *ngFor="let dilema of allDilemmas">
-            <a href="/dilema/{{ dilema.fecha_generacion }}"  (click)="toggleMenu()">{{ getTitleOfDilemma(dilema) }}</a>
+          <a href="/dilema/{{ dilema.fecha_generacion }}" (click)="toggleMenu()">{{ getTitleOfDilemma(dilema) }}</a>
+        </div>
+      </div>
+      <div id="mostsDilemmas">
+        <div id="mostVoted">
+          <div class="item" (click)="scrollToMostDilemmas()">
+            <h2>Más Votados</h2>
+          </div>
+          <div class="item" *ngFor="let dilema of getTop5DilemmasByVotes()">
+            <a href="/dilema/{{ dilema.fecha_generacion }}" (click)="toggleMenu()">{{ getTitleOfDilemma(dilema) }}</a>
+          </div>
+
+        </div>
+        <div id="mostCommented" (click)="scrollToMostDilemmas()">
+          <div class="item">
+            <h2>Más Comentados</h2>
+          </div>
+          <div class="item" *ngFor="let dilema of getTop5DilemmasByComments()">
+            <a href="/dilema/{{ dilema.fecha_generacion }}" (click)="toggleMenu()">{{ getTitleOfDilemma(dilema) }}</a>
+          </div>
+
         </div>
       </div>
     </div>
   </div>
-  
+</div>

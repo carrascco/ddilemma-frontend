@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Dilema } from '../types';
 import { CommonModule } from '@angular/common';
 
@@ -28,7 +28,33 @@ export class MenuComponent implements OnInit{
     this.movingAnimation=false;
   }
 
-  
+  getTop5DilemmasByVotes(): Dilema[] {
+    return this.allDilemmas
+        .map(dilema => ({
+            ...dilema,
+            totalVotes: dilema.votos.reduce((acc, curr) => acc + curr, 0)
+        }))
+        .sort((a, b) => b.totalVotes - a.totalVotes)
+        .slice(0, 5);
+}
+
+getTop5DilemmasByComments(): Dilema[] {
+  return this.allDilemmas
+      .map(dilema => ({
+          ...dilema,
+          totalComments: dilema.respuestas.length
+      }))
+      .sort((a, b) => b.totalComments - a.totalComments)
+      .slice(0, 5);
+}
+
+scrollToMostDilemmas() {
+  console.log("Scrolling to most dilemmas");
+  const element = document.getElementById('mostsDilemmas');
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+}
 
   getTitleOfDilemma(dilema: Dilema) {
     let fecha_generacion = dilema.fecha_generacion;

@@ -20,6 +20,6 @@
     
     </div>
 
-    <app-noticia id="app-noticia"  *ngIf="buttonClicked" [dilemma]="dilemma"></app-noticia>
+    <app-noticia id="app-noticia"  *ngIf="buttonClicked" [dilemma]="dilemma" [dilemmaIndex]="dilemmaIndex"></app-noticia>
 </div>
     <app-menu class="app-menu" *ngIf="showMenuButton" [allDilemmas]="allDilemmas" (menuToggled)="handleMenuToggle($event)"></app-menu>

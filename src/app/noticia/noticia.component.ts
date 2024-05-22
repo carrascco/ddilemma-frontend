@@ -22,7 +22,7 @@ export class NoticiaComponent {
     votos: [],
     comentarios: []
   };
-
+  @Input() dilemmaIndex: number = 0;
   //I want to display the news related to the dilemma of the day
   noticia: Noticia;
   
@@ -44,7 +44,10 @@ export class NoticiaComponent {
     console.log("Entrando en getNoticia");  
     this.dataService.getNoticia().subscribe((data) => {
       console.log(data);
-      this.noticia = data[data.length - 1];
+      
+      
+
+      this.noticia = data.reverse()[this.dilemmaIndex];
 
       const parts = this.noticia.cuerpo.split('.');
       this.parrafo1 = parts.slice(0, 2).join('.');

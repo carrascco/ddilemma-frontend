@@ -27,7 +27,7 @@ interface Button {
 export class DilemmaComponent implements OnChanges {
   @Input() dilemma: Dilema;
   @Input() allDilemmas: Dilema[]=[];
-
+  @Input() dilemmaIndex: number = 0;
   idDilemma: string = '';
   showMenuButton: boolean = false;
   respuestas: any[] = [];
@@ -144,7 +144,8 @@ export class DilemmaComponent implements OnChanges {
       }, 500);
     }
     setTimeout(() => {
-      this.scrollIntoPercentages();
+      if(reallyAClick)
+        this.scrollIntoPercentages();
       console.log("Variable clickedButton= ",this.clickedButton);
       
     }

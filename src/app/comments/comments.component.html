@@ -41,7 +41,7 @@
 
         <!----------------------- RESPUESTAS ----------------------->
         <div class="comments ">
-            <div class="comments item replies" *ngFor="let reply of comment.respuestas"
+            <div class="comments item replies" *ngFor="let reply of comment.respuestas; let i = index"
                 style="text-align: left;   padding-bottom: 1vw;">
                 <div style="display: flex;">
                     <i class="fas fa-user-circle fa-3x user-icon"></i>
@@ -56,9 +56,9 @@
                 <article>{{reply.contenido}}</article>
             </div>
 
-            <button class="btn reply-btn clicked" id="replyButton" (click)="toggleInputsComments()">Responder</button>
+            <button class="btn reply-btn clicked" id="replyButton" (click)="toggleInputsComments(i)">Responder</button>
 
-            <form class="reply-form replies" *ngIf="showReplyForm">
+            <form class="reply-form replies" *ngIf="showReplyForm && i==comentarioAResponderIndex">
                 <div class="item">
                     <i class="fas fa-user-circle fa-3x user-icon" style="flex: auto;"></i>
                 

@@ -17,7 +17,31 @@ div > h2{
     right: -23.3vw;
     animation: move 2s ease-in-out infinite; /* Aplica la animación */
   }
-  
+  #pastDilemmas{
+    max-height: 21.3vw;
+    overflow: auto;
+    border-bottom: 0.2vw solid #0F2E52;
+  }
+
+  #mostsDilemmas{
+    display: flex;
+  }
+  #mostsDilemmas .item{
+    align-content: center;
+  }
+  #mostVoted{
+    border-right: 0.2vw solid #0F2E52;
+  }
+  #mostCommented{
+    margin-left: 1vw;
+  }
+
+  #mostsDilemmas h2{
+    font-size: 1.2vw;
+    text-align: center;
+    color:#4EC8DF;
+    cursor: pointer;;
+  }
   .btn2 {
     background-color: #ffffff;
     color: black;
@@ -69,40 +93,49 @@ div > h2{
     transform: translateX(0);
   }
   
+  
   .container.show-menu .btn-menu-container {
     transform: translateX(-90%);
   }
   @keyframes move {
     0%, 100% {
-      transform: translateX(0); /* Inicia en la posición original */
+      transform: translateX(0); 
     }
     50% {
-      transform: translateX(25px); /* Mueve el div 20 píxeles a la derecha */
+      transform: translateX(-35px); 
     }
   }
   
   @media only screen and (max-width: 1000px) {
     div > h2 {
       color: #0F2E52;
-      margin-top: -5vw; /* Ajuste de márgenes para móviles */
-      margin-bottom: -2.5vw;
+      margin-top: -2vw;
+    margin-bottom: 4vw;
+    }
+
+    .container.show-menu{
+      /* right: -121vw; */
+      transform: translateX(-130%);
+      transition: transform 0.3s ease;
     }
   
     .container {
       position: fixed;
-      top: 50%;
-      right: -148vw;
+      top: 25%;
+      right: -186vw;
       transform: translateX(-50%);
+      transition: transform 0.3s ease;
       width: 80%; 
     }
   
     .moving {
-      top: 25%;
+      top: 25%;    right: -150vw;
       animation: move 2s ease-in-out infinite;
     }
   
     .btn2 {
-      border-radius: 5px; /* Ajuste de bordes redondeados para mejor tacto */
+      
+    border-radius: 25px 0 0 25px;
       cursor: pointer;
       width: auto; /* Permitir que el botón crezca con el texto */
       font-size: 4vw; /* Aumentar el tamaño de la fuente para mejor lectura */
@@ -115,7 +148,7 @@ div > h2{
     }
   
     .menu {
-      border-radius: 5px; /* Ajuste del borde redondeado */
+      border-radius: 15px; /* Ajuste del borde redondeado */
       padding: 5%; /* Aumentar padding */
       width: 80%; /* Ajuste del ancho del menú */
       max-width: 80%; /* Asegurarse de que el menú no exceda el 80% del ancho */

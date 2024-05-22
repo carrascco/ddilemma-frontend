@@ -79,7 +79,7 @@ export class AppComponent implements OnInit { // Implementa OnInit
         (data) => {
           
           this.lastDilemma = data[data.length-1];
-
+          
             this.allDilemmas = data.reverse();
             this.allDilemmas.shift();
           resolve(data);
@@ -92,13 +92,18 @@ export class AppComponent implements OnInit { // Implementa OnInit
     });
   }
 
+  dilemmaIndex: number = 0
   getDilemmaById(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       this.dataService.getLastDilemma().subscribe(
         (data) => {
-          this.allDilemmas = data.reverse();
-          this.allDilemmas.shift();
-          var dilemaWithID = this.allDilemmas.find(dilema => dilema.fecha_generacion === id);
+            this.allDilemmas = data.reverse();
+            var dilemaWithID = this.allDilemmas.find(dilema => dilema.fecha_generacion === id);
+            if(dilemaWithID){
+              this.dilemmaIndex = this.allDilemmas.indexOf(dilemaWithID);
+              console.log("INDEX: ",this.dilemmaIndex)
+            }
+            this.allDilemmas.shift();
           if(dilemaWithID != null){
             this.lastDilemma = dilemaWithID;
             resolve(dilemaWithID);
