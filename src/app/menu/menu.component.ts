@@ -42,14 +42,13 @@ getTop5DilemmasByComments(): Dilema[] {
   return this.allDilemmas
       .map(dilema => ({
           ...dilema,
-          totalComments: dilema.respuestas.length
+          totalComments: dilema.comentarios ? dilema.comentarios.length : 0
       }))
       .sort((a, b) => b.totalComments - a.totalComments)
       .slice(0, 5);
 }
 
 scrollToMostDilemmas() {
-  console.log("Scrolling to most dilemmas");
   const element = document.getElementById('mostsDilemmas');
   if (element) {
     element.scrollIntoView({ behavior: 'smooth' });

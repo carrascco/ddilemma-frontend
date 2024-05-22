@@ -41,10 +41,8 @@ export class NoticiaComponent {
   }
 
   retrieveNoticia() {
-    console.log("Entrando en getNoticia");  
     this.dataService.getNoticia().subscribe((data) => {
-      console.log(data);
-      
+   
       
 
       this.noticia = data.reverse()[this.dilemmaIndex];
@@ -58,7 +56,6 @@ export class NoticiaComponent {
 
   noticiaRetrieved() {
     this.viewNoticia = true;
-    console.log(this.noticia);
     setTimeout(() => {
       this.scrollIntoNoticia();
     }, 250);

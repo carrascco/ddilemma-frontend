@@ -75,7 +75,6 @@ export class DilemmaComponent implements OnChanges {
           this.clickRespuesta(this.cookieSvc.get('respuesta'), false);
       }
       if(window.location.href.includes('/dilema')){
-        console.log("SHOWMENUBUTTON A TRUE");
         this.showMenuButton=true;
         if(this.buttonClicked==false){
           this.clickRespuesta(this.cookieSvc.get('respuesta'), false);
@@ -111,7 +110,6 @@ export class DilemmaComponent implements OnChanges {
   percentage: number = 0;
 
   clickRespuesta(respuesta: any, reallyAClick: boolean = true) {
-    console.log("ENTRO EN clickRespuesta");
     let enviar =false;
     if (this.cookieSvc.get('voted') !== 'true') {
       this.cookieSvc.set('voted', 'true');
@@ -146,7 +144,6 @@ export class DilemmaComponent implements OnChanges {
     setTimeout(() => {
       if(reallyAClick)
         this.scrollIntoPercentages();
-      console.log("Variable clickedButton= ",this.clickedButton);
       
     }
     , 250);

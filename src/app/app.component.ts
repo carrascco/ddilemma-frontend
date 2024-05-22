@@ -101,7 +101,7 @@ export class AppComponent implements OnInit { // Implementa OnInit
             var dilemaWithID = this.allDilemmas.find(dilema => dilema.fecha_generacion === id);
             if(dilemaWithID){
               this.dilemmaIndex = this.allDilemmas.indexOf(dilemaWithID);
-              console.log("INDEX: ",this.dilemmaIndex)
+              
             }
             this.allDilemmas.shift();
           if(dilemaWithID != null){

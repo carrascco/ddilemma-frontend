@@ -31,6 +31,7 @@ div > h2{
   }
   #mostVoted{
     border-right: 0.2vw solid #0F2E52;
+    padding-right: 0.5vw;
   }
   #mostCommented{
     margin-left: 1vw;
@@ -152,7 +153,7 @@ div > h2{
       padding: 5%; /* Aumentar padding */
       width: 80%; /* Ajuste del ancho del menú */
       max-width: 80%; /* Asegurarse de que el menú no exceda el 80% del ancho */
-      max-height: 50vh; /* Limitar la altura máxima para evitar el desbordamiento */
+      max-height: 61vh;
       overflow: auto;
     }
   
@@ -171,7 +172,25 @@ div > h2{
     .container.show-menu .btn-menu-container {
       transform: translateX(-100%); /* Ajustar el desplazamiento del botón */
     }
+    #pastDilemmas{
+      max-height: 68.3vw;
+    }
   
+    #mostVoted{
+      border-right: 0.2vw solid #0F2E52;
+      padding-right: 0.5vw;
+    }
+    #mostCommented{
+      margin-left: 1.3vw;
+    }
+  
+    #mostsDilemmas h2{
+      font-size: 3.3vw;
+      text-align: center;
+      color:#4EC8DF;
+      cursor: pointer;;
+      padding-top: 5vw;
+    }
     @keyframes move {
       0%, 100% {
         transform: translateX(0);

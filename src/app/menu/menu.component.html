@@ -17,17 +17,17 @@
           <div class="item" (click)="scrollToMostDilemmas()">
             <h2>Más Votados</h2>
           </div>
-          <div class="item" *ngFor="let dilema of getTop5DilemmasByVotes()">
-            <a href="/dilema/{{ dilema.fecha_generacion }}" (click)="toggleMenu()">{{ getTitleOfDilemma(dilema) }}</a>
+          <div class="item" *ngFor="let dilema of getTop5DilemmasByVotes(); let i=index;">
+            <a href="/dilema/{{ dilema.fecha_generacion }}" (click)="toggleMenu()"><strong>#{{i+1}}</strong> Dilema {{ getTitleOfDilemma(dilema).slice(-5) }}</a>
           </div>
 
         </div>
-        <div id="mostCommented" (click)="scrollToMostDilemmas()">
+        <div id="mostCommented" (click)="scrollToMostDilemmas(); ">
           <div class="item">
             <h2>Más Comentados</h2>
           </div>
-          <div class="item" *ngFor="let dilema of getTop5DilemmasByComments()">
-            <a href="/dilema/{{ dilema.fecha_generacion }}" (click)="toggleMenu()">{{ getTitleOfDilemma(dilema) }}</a>
+          <div class="item" *ngFor="let dilema of getTop5DilemmasByComments();let i=index;">
+            <a href="/dilema/{{ dilema.fecha_generacion }}" (click)="toggleMenu()"><strong>#{{i+1}}</strong> Dilema {{ getTitleOfDilemma(dilema).slice(-5) }}</a>
           </div>
 
         </div>
