@@ -82,6 +82,9 @@ export class AppComponent implements OnInit { // Implementa OnInit
           
             this.allDilemmas = data.reverse();
             this.allDilemmas.shift();
+            this.allDilemmas = this.allDilemmas.slice(0, 30);
+
+            
           resolve(data);
         },
         (error) => {

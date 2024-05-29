@@ -100,6 +100,7 @@ hr{
     font-size: 0.85vw; margin-left: 4vw;
     margin-bottom: 1.5vw;
     margin-top: 1vw;
+    margin-right: 2.5vw;
   }
   /* input[type="text"] {
     /* Eliminar margen que empuja los inputs hacia abajo */

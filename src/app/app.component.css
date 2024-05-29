@@ -17,3 +17,23 @@
   .disappear{
     display: none;
   }
+
+  @media screen and (max-width: 1000px) {
+    .home-icon{
+      position: fixed;
+    
+      top: 13vw;
+    
+      left: 3vw;
+    
+      z-index: 1000;
+    
+      font-size: 8vw;
+    
+      color: #0F2E52;
+    
+      text-decoration: none;
+    
+      width: 8vw;
+  }
+}

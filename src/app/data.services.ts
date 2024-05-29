@@ -44,7 +44,6 @@ export class DataServices {
   // private apiUrl = 'http://localhost:3000/';
 
   getLastDilemma(): Observable<Dilema[]>{
-    console.log("ENTRANDO EN DATA: GET DILEMAS");
     return collectionData(this.dilemasCollection).pipe(
       map(data => {
         return data as Dilema[];
@@ -59,7 +58,6 @@ export class DataServices {
   //"votos " is a field on the dilema document from the dilemas collection
   //Lets use the dilema id to update the votes field
   updateVotos(dilemaId: string, votos: number[]):Observable<void> {
-    console.log("ENTRANDO EN DATA: UPDATE VOTOS");
     const dilemaRef = doc(this.firestore, 'dilemas/'+ dilemaId);
     const promise = updateDoc(dilemaRef, {votos: votos});
     return from(promise);
@@ -77,7 +75,6 @@ export class DataServices {
   // private apiUrl = 'https://stark-peak-62036-bec9579aee22.herokuapp.com/noticias';
   
   getNoticia(): Observable<Noticia[]>{
-    console.log("ENTRANDO EN DATA: GET NOTICIAS");
     return collectionData(this.noticiasCollection).pipe(
       map(data => {        
         return data as Noticia[];
